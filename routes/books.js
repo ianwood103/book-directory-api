@@ -12,6 +12,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+//GET back a specific post
+router.get('/:postId', async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.postId);
+    res.json(book);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 //POST a new book into directory
 router.post('/', async (req, res) => {
   const book = new Book({
@@ -25,6 +35,34 @@ router.post('/', async (req, res) => {
     res.json(savedBook);
   } catch (err) {
     res.json({ message: err });
+  }
+});
+
+//DELETE a specific post
+router.delete('/:postId', async (req, res) => {
+  try {
+    const removedBook = await Book.deleteOne({ _id: req.params.postId });
+    res.json(removedBook);
+  } catch (err) {
+    res.json({ message: err});
+  }
+});
+
+//PATCH a specific post (update)
+router.patch('/:postId', async (req, res) => {
+  try {
+    let updatedBook = '';
+    for (let key in req.body) {
+      let obj = {};
+      obj[key] = req.body[key];
+      updatedBook = await Book.updateOne(
+        { _id: req.params.postId },
+        { $set: obj }
+      );
+    }
+    res.json(updatedBook);
+  } catch (err) {
+    res.json({ message: err});
   }
 });
 
