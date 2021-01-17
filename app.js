@@ -16,6 +16,14 @@ const booksRoute = require('./routes/books');
 
 app.use('/books', booksRoute);
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
 //Main home route
 app.get('/', (req, res) => {
   res.send('Welcome to my book directory!');
