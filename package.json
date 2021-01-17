@@ -4,8 +4,7 @@
   "description": "RESTful API built using MongoDB, Express, and Node.js that functions as a personal book directory to keep track of what books I have and have not read, amongst other things.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
