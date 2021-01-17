@@ -1,7 +1,10 @@
+const PORT = process.env.PORT || 3000;
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+require('dotenv/config');
+const DB_CONNECTION = process.env.DB_CONNECTION;
 
 //Middlewares
 app.use(bodyParser.json());
@@ -17,10 +20,13 @@ app.get('/', (req, res) => {
 });
 
 //Mongoose instance connection
-mongoose.connect('mongodb://localhost/db',
+mongoose.connect(DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true },
-  () => console.log('Connected to DB')
+  () => console.log('connected to database')
 );
 
+//Username: ianwood
+//Password: UW23a85iSttTr2Ir
+
 //Start listening to server
-app.listen(3000);
+app.listen(PORT, () => console.log('listening on port ' + PORT));
