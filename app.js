@@ -27,8 +27,5 @@ mongoose.connect(DB_CONNECTION,
   () => console.log('connected to database')
 );
 
-//Username: ianwood
-//Password: UW23a85iSttTr2Ir
-
 //Start listening to server
 app.listen(PORT, () => console.log('listening on port ' + PORT));
